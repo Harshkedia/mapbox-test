@@ -11,6 +11,8 @@
 </template>
 
 <style>
+@import "https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css";
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
