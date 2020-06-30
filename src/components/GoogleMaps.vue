@@ -17,7 +17,6 @@ export default {
   },
   mounted() {
     this.createMap();
-    console.log(this.map.getBounds());
   },
   methods: {
     createMap() {
@@ -26,10 +25,24 @@ export default {
       this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-        center: [-74.5, 40], // starting position [lng, lat]
+        center: [-80, 50], // starting position [lng, lat]
         zoom: 9 // starting zoom
       });
-      console.log(this.map);
+    },
+    addPoint(lat, long) {
+      this.map.addSource("point", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [lat, long]
+          },
+          properties: {
+            "marker-symbol": "monument"
+          }
+        }
+      });
     }
   }
 };
