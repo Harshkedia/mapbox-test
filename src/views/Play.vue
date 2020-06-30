@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <map-box />
   </div>
 </template>
@@ -9,7 +9,7 @@
 import MapBox from "../components/MapBox.vue";
 
 export default {
-  name: "Home",
+  name: "Record",
   components: {
     MapBox
   }

@@ -1,22 +1,22 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Record from "../views/Record.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: Home
+    name: "record",
+    component: Record
   },
   {
-    path: "/about",
-    name: "about",
+    path: "/play",
+    name: "play",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import("../views/About.vue")
+    component: () => import("../views/Play.vue")
   }
 ];
 
