@@ -2,7 +2,6 @@
   <div>
     Record something here <br />
     <button ref="record" @click="record">Record</button> <br />
-    <button ref="stop" @click="stop">Stop</button> <br >
     <audio ref="player" controls :src="audioURL" />
   </div>
 </template>
@@ -17,7 +16,8 @@ export default {
     return {
       mediaRecorder: null,
       chunks: [],
-      audioURL: ""
+      audioURL: "",
+      position: {}
     };
   },
   computed: {
@@ -32,12 +32,17 @@ export default {
     }
   },
   mounted() {
+    this.getCurrentPosition();
+
     navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
       this.mediaRecorder = new MediaRecorder(stream);
+
+      // Add chunks whenever data is available
       this.mediaRecorder.ondataavailable = e => {
         this.chunks.push(e.data);
       };
 
+      // Create url when recording stops
       this.mediaRecorder.onstop = () => {
         console.log("recorder stopped");
 
@@ -53,11 +58,17 @@ export default {
       this.mediaRecorder.start();
       console.log(this.mediaRecorder.state);
       console.log("recorder started");
+      setTimeout(this.stop, 4000);
     },
     stop() {
       this.mediaRecorder.stop();
       console.log(this.mediaRecorder.state);
       console.log("recorder stopped");
+    },
+    getCurrentPosition() {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.position = { long: position.coords.longitude, lat: position.coords.latitude };
+      });
     }
   }
 };
