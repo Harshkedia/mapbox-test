@@ -16,6 +16,7 @@ export default {
     };
   },
   mounted() {
+    console.log(process.env.MAPBOX_API_KEY);
     this.createMap();
     this.map.on("load", () => {
       this.addPoint(-74.5, 40);
@@ -25,8 +26,7 @@ export default {
   },
   methods: {
     createMap() {
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoiaGtlZGlhNzc5NyIsImEiOiJja2Mwc3FzODYxZjJmMnJsajdla3hhbm91In0.DuPVycamrmjI1eDuql2XqQ";
+      mapboxgl.accessToken = process.env.MAPBOX_API_KEY;
       this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/light-v10", // stylesheet location
